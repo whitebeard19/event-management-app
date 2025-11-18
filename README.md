@@ -44,7 +44,8 @@ A beautifully themed **purple/blue calendar-based event planner** built with **R
 
 > *(Replace these placeholder images with real screenshots)*
 
-- **Login Page**  
+- **Login Page** 
+![loginpage](./imgs/login.png) 
 - **Signup Page**  
 - **Calendar Dashboard**  
 - **Event Modal**  

@@ -15,6 +15,7 @@ const Calendar = () => {
   const [eventTitle, setEventTitle] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [eventError, setEventError] = useState("");
 
 
   const days = getCalendarDays(currentDate);
@@ -30,13 +31,14 @@ const Calendar = () => {
   }
 
   const saveEvent = () => {
+    setEventError("");
     const key = format(selectedDate,"yyyy-MM-dd");
     const existing = events[key] || [];
 
     const error = validateEvent(eventTitle, startTime, endTime, existing);
 
     if(error){
-      alert(error);
+      setEventError(error);
       return;
     }
 
@@ -56,6 +58,7 @@ const Calendar = () => {
   }
 
   const cancelEvent = () => {
+    setEventError("");
     setShowModal(false);
     setEventTitle("");
     setStartTime("");
@@ -165,13 +168,13 @@ const Calendar = () => {
               <div className="fixed inset-0 backdrop-blur-sm bg-black/10 flex justify-center items-center">
                 <div className="bg-white p-6 rounded-xl shadow-2xl w-96 border border-gray-200">
                   <h2 className="text-xl font-semibold mb-4 text-gray-800">Add Event - {format(selectedDate, "PPP")}</h2>
-                  <input type="text" placeholder="Event Title" onChange={(e) => setEventTitle(e.target.value)} value={eventTitle} className="border border-gray-300 w-full p-2.5 rounded-lg mb-3 focus:ring-2 focus:ring-indigo-400 focus:outline-none" />
+                  <input type="text" placeholder="Event Title *" onChange={(e) => setEventTitle(e.target.value)} value={eventTitle} className="border border-gray-300 w-full p-2.5 rounded-lg mb-3 focus:ring-2 focus:ring-indigo-400 focus:outline-none" />
                   <select
                     value={startTime}
                     onChange={(e) => setStartTime(e.target.value)}
                     className="border border-gray-300 w-full p-2.5 rounded-lg mb-3 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
                   >
-                    <option value="">Start Time</option>
+                    <option value="">Start Time *</option>
                     {timeSlots.map((t) => (
                       <option key={t} value={t}>{t}</option>
                     ))}
@@ -181,11 +184,18 @@ const Calendar = () => {
                     onChange={(e) => setEndTime(e.target.value)}
                     className="border border-gray-300 w-full p-2.5 rounded-lg mb-3 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
                   >
-                    <option value="">End Time</option>
+                    <option value="">End Time *</option>
                     {timeSlots.map((t) => (
                       <option key={t} value={t}>{t}</option>
                     ))}
                   </select>
+                  <div className="mb-3"> 
+                    {
+                      eventError && (
+                        <p className='text-red-600 text-sm font-medium text-center px-2'>{eventError}</p>  
+                      )
+                    }
+                  </div>
                   <div>
                     <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded w-full mb-3 transition" onClick={saveEvent}>
                     Save Event

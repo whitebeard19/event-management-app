@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <App/>,
         children: [
             {
-                path: "/calendar",
+                path: "/",
                 element: <ProtectedRoute><Home/></ProtectedRoute>,
             },
             {

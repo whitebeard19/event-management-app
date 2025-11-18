@@ -18,7 +18,7 @@ const Login = () => {
 
     try{
       await login(email,password);
-      navigate("/calendar");
+      navigate("/");
     }
     catch (error){
       setErrorMessage(getErrorMessage(error.code));
@@ -29,7 +29,7 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try{
       await loginWithGoogle();
-      navigate("/calendar");
+      navigate("/");
     }
     catch (error) {
       setErrorMessage(getErrorMessage(error.code));

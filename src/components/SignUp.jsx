@@ -17,7 +17,7 @@ const SignUp = () => {
       e.preventDefault();
       try{
         await signup(email,password);
-        navigate("/calendar");
+        navigate("/");
       } catch (error) {
         setErrorMessage(getErrorMessage(error.code));
         console.log(error.code);
@@ -27,7 +27,7 @@ const SignUp = () => {
     const handleGoogleSignup = async () => {
       try{
         await loginWithGoogle();
-        navigate("/calendar");
+        navigate("/");
       }
       catch (error) {
         setErrorMessage(getErrorMessage(error.code));
